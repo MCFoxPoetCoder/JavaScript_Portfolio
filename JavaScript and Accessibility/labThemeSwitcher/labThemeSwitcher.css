@@ -1,0 +1,70 @@
+/* provided by freeCodeCamp.org */
+body {
+  margin: 0;
+  font-family: sans-serif;
+  transition: background 0.3s, color 0.3s;
+  height: 100vh;
+}
+
+#theme-switcher-button {
+  width: 120px;
+  height: 30px;
+  background-image: linear-gradient(135deg, darkred, red);
+  color: white;
+  font-weight: bold;
+}
+#theme-switcher-button:active {
+background-image: linear-gradient(135deg, red, darkred);
+}
+
+ul[role="menu"] {
+  margin: 0;
+  padding: 0;
+}
+
+li[role="menuitem"] {
+  list-style-type: none;
+  padding: 5px;
+}
+li[role="menuitem"]:hover {
+  background-color: lightgray;
+}
+
+#status {
+  text-align: center;
+  min-height: 20px;
+}
+
+/* Written by me */
+
+.theme-dark {
+  background-color: black;
+  color: white;
+  font-family: monospace;
+  font-size: 12pt;
+  font-weight: normal;
+}
+
+.theme-light {
+  background-color: white;
+  color: black;
+  font-family: sans-serif;
+  font-size: 12pt;
+  font-weight: light;
+}
+
+.theme-frost {
+  background-image: linear-gradient(to bottom, lightblue, white);
+  color: darkblue;
+  font-family: chiller;
+  font-size: 16pt;
+  font-weight: bold;
+}
+
+.theme-forest {
+  background-image: linear-gradient(to bottom, darkgreen, green);
+  color: rgb(255, 255, 205);
+  font-family: serif;
+  font-size: 12pt;
+  font-weight: normal;
+}
