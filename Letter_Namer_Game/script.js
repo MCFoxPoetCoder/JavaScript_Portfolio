@@ -1,4 +1,5 @@
 const nextBtn = document.getElementById("next");
+const prevBtn = document.getElementById("prev");
 const letterDisplay = document.getElementById("letter");
 const docBody = document.querySelector("body");
 const gameOptions = document.querySelectorAll("#game-options input[type='checkbox']")
@@ -24,11 +25,10 @@ const sets = [
 const alphabetUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 const alphabetLower = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toLowerCase().split("");
 const numbersArr = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
-let alphaQueue = [];
-let practiceSet = [];
+const alphaQueue = [];
+const practiceHistory = [];
+const practiceSet = [];
 practiceSet.push(...sets[0].setArr)
-
-console.log(`Starting practiceSet: ${practiceSet}`);
 
 function pickRandomLetterIndex () {
   return Math.floor(Math.random() * practiceSet.length);
@@ -50,19 +50,51 @@ function changeLetterColor () {
   }
 }
 
-function updateLetter () {
+function displayCurrentLetter () {
+  if (practiceHistory.length === 0) return;
+  const currentLetter = practiceHistory[practiceHistory.length - 1];
+  letterDisplay.innerText = currentLetter;
+  changeLetterColor ();
+}
+
+function newLetter () {
   const randLetterIndex = pickRandomLetterIndex ();
   const randLetter = practiceSet[randLetterIndex];
-  letterDisplay.innerText = randLetter;
-  changeLetterColor ();
+  
   practiceSet.splice(randLetterIndex, 1);
-  alphaQueue.push(randLetter);
-  if (alphaQueue.length >= practiceSet.length/2) {
-    practiceSet.push(alphaQueue[0])
-    alphaQueue.shift()
+  
+  if (practiceHistory.length > 0) {
+    alphaQueue.push(practiceHistory.shift());
   }
-  console.log("practiceSet: ", practiceSet);
-  console.log("alphaQueue: ", alphaQueue);
+  practiceHistory.push(randLetter);
+  displayCurrentLetter();
+  if (alphaQueue.length >= (practiceSet.length + alphaQueue.length + practiceHistory.length)/2) {
+    practiceSet.push(alphaQueue[0]);
+    alphaQueue.shift();
+  }
+}
+
+function prevLetter () {
+  if (alphaQueue.length === 0) return;
+  const lastLetter = alphaQueue.pop();
+  practiceHistory.push(lastLetter);
+  displayCurrentLetter();
+  console.log("practiceHistory", practiceHistory);
+  console.log("alphaQueue", alphaQueue);
+  console.log("practiceSet", practiceSet);
+}
+
+function nextLetter () {
+  if (practiceHistory.length > 1) {
+    const nextLet = practiceHistory.pop();
+    alphaQueue.push(nextLet);
+    displayCurrentLetter();
+  } else {
+    newLetter();
+  }
+  console.log("practiceHistory", practiceHistory);
+  console.log("alphaQueue", alphaQueue);
+  console.log("practiceSet", practiceSet);
 }
 
 /* Old addPracticeSet function:
@@ -77,18 +109,15 @@ if (value === "uppercase-letters") {
 
 function addPracticeSet (value) {
   const setObj = sets.find(set => set.value === value);
-  console.log(setObj.setArr);
   practiceSet.push(...setObj.setArr);
-  console.log(`practiceSet: ${practiceSet}`)
 }
 
 function removePracticeSet (value) {
   const setObj = sets.find(set => set.value === value);
   const regex = new RegExp(setObj.setRegex);
-  practiceSet = practiceSet.filter(item => !regex.test(item))
-  alphaQueue = alphaQueue.filter(item => !regex.test(item))
-  console.log(`practiceSet: ${practiceSet}`)
-  console.log(`alphaQueue: ${alphaQueue}`)
+  practiceSet.splice(0, practiceSet.length, ...practiceSet.filter(item => !regex.test(item)));
+  alphaQueue.splice(0, alphaQueue.length, ...alphaQueue.filter(item => !regex.test(item)));
+  practiceHistory.splice(0, practiceHistory.length, ...practiceHistory.filter(item => !regex.test(item)));
 }
 
 gameOptions.forEach((input) =>
@@ -101,11 +130,31 @@ gameOptions.forEach((input) =>
   })
  );
 
-nextBtn.addEventListener("click", () => updateLetter());
+nextBtn.addEventListener("click", () => nextLetter());
+prevBtn.addEventListener("click", () => prevLetter());
 
 docBody.addEventListener("keyup", (e) => {
   if (e.code === "Space") {
     e.preventDefault();
-    updateLetter();
+    nextLetter();
+  }
+})
+docBody.addEventListener("keyup", (e) => {
+  if (e.code === "ArrowRight") {
+    e.preventDefault();
+    nextLetter();
+  }
+})
+
+docBody.addEventListener("keyup", (e) => {
+  if (e.code === "ArrowLeft") {
+    e.preventDefault();
+    prevLetter();
+  }
+})
+docBody.addEventListener("keyup", (e) => {
+  if (e.code === "Backspace") {
+    e.preventDefault();
+    prevLetter();
   }
 })
