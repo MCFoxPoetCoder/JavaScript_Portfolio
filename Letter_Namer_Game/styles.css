@@ -33,7 +33,7 @@ h1 {
   margin: 0;
   text-align: center;
   font-size: 70cqi;
-  font-family: "Comic Sans MS", "Comic Sans", sans-serif;
+  font-family: "Comic Sans MS", "Comic Sans", serif;
   color: orange;
 }
 
@@ -65,4 +65,41 @@ h1 {
 
 #prev:active {
   background-image: linear-gradient(to left, orange, gold, green, blue, indigo, violet, red);
+}
+
+@media (min-width: 600px) {
+  body {
+    font-size: 18px;
+  }
+  #letter-box {
+  height: auto;
+  width: 80vh;
+  aspect-ratio: 1/1;
+  border: 2px dashed black;
+  margin: 5px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  container-type: inline-size;
+  background-color: white;
+  }
+  #next {
+  width: 60%;
+  height: auto;
+  aspect-ratio: 1/1;
+  border-radius: 100%;
+  margin: 5px;
+  font-size: 2.5em;
+  display: block;
+  }
+  #prev {
+  width: 60%;
+  height: auto;
+  aspect-ratio: 1/1;
+  border-radius: 100%;
+  margin: 5px;
+  font-size: 2.5em;
+  display: block;
+  }
 }
