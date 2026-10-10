@@ -67,13 +67,13 @@ h1 {
   background-image: linear-gradient(to left, orange, gold, green, blue, indigo, violet, red);
 }
 
-@media (max-width: 600px) {
+@media only screen and (max-width: 600px) {
   body {
     font-size: 18px;
   }
   #letter-box {
   height: auto;
-  width: 80vw;
+  width: 70vw;
   aspect-ratio: 1/1;
   border: 2px dashed black;
   margin: 5px auto;
