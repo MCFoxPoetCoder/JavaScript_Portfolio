@@ -73,6 +73,20 @@ h1 {
   background-image: linear-gradient(to left, orange, gold, green, blue, indigo, violet, red);
 }
 
+#review-btn-container {
+  width: 200px;
+  margin: 5px;
+  border: 2px solid black;
+  background-image: linear-gradient(to left, red, orange, gold, green, blue, indigo, violet);
+  color: white;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+
+#review-btn-container:active {
+  background-image: linear-gradient(to left, orange, gold, green, blue, indigo, violet, red);
+}
+
 @media only screen and (max-width: 600px) {
   body {
     font-size: 18px;
@@ -102,6 +116,14 @@ h1 {
   #prev {
   width: 60%;
   border-radius: 20%;
+  margin: 5px;
+  font-size: 1.5em;
+  display: block;
+  }
+  #review-btn-container {
+    width: 60%;
+  border-radius: 20%;
+  border: 2px solid black;
   margin: 5px;
   font-size: 1.5em;
   display: block;

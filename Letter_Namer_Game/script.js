@@ -57,12 +57,25 @@ function displayCurrentLetter () {
   changeLetterColor ();
 }
 
+function reviewLastLetter () {
+  if (document.getElementById("review-btn").checked) {
+    if (!practiceSet.includes(practiceHistory[practiceHistory.length - 1])) {
+      practiceSet.push(practiceHistory[practiceHistory.length - 1]);
+    }
+    document.getElementById("review-btn").checked = false;
+  }
+}
+
 function newLetter () {
   const randLetterIndex = pickRandomLetterIndex ();
   const randLetter = practiceSet[randLetterIndex];
   
   practiceSet.splice(randLetterIndex, 1);
-  
+
+  console.log("practiceHistory", practiceHistory);
+  console.log("alphaQueue", alphaQueue);
+  console.log("practiceSet", practiceSet);
+
   if (practiceHistory.length > 0) {
     alphaQueue.push(practiceHistory.shift());
   }
@@ -75,6 +88,7 @@ function newLetter () {
 }
 
 function prevLetter () {
+  document.getElementById("review-btn").checked = false;
   if (alphaQueue.length === 0) return;
   const lastLetter = alphaQueue.pop();
   practiceHistory.push(lastLetter);
@@ -85,6 +99,7 @@ function prevLetter () {
 }
 
 function nextLetter () {
+  reviewLastLetter();
   if (practiceHistory.length > 1) {
     const nextLet = practiceHistory.pop();
     alphaQueue.push(nextLet);
