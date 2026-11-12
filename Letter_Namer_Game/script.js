@@ -147,6 +147,7 @@ gameOptions.forEach((input) =>
     } else {
       removePracticeSet(input.value); 
     }
+    console.log(practiceSet);
   })
  );
 
