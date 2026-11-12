@@ -1,0 +1,53 @@
+body {
+  background-color: #000080;
+}
+
+h1 {
+  color: yellow;
+}
+
+#options {
+  width: 80%;
+  height: auto;
+  margin: 10px auto;
+  border: 2px solid #ffffA7;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: #ffffED
+}
+
+#options > * {
+  margin: 5px;
+}
+
+#weather-container {
+  width: 80%;
+  min-height: 200px;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  border-radius: 5%;
+  border: 2px solid yellow;
+  background-color: #ffffA7;
+  padding: 10px;
+}
+
+#all-weather-block {
+  display: grid;
+  grid-template-columns: auto auto
+}
+
+#weather-main-block {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 5px;
+}
+
+.key-info {
+  font-size: 1.5rem;
+}

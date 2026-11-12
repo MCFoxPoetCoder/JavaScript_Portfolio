@@ -1,0 +1,121 @@
+function dfsNQueens (n) {
+  console.log("-".repeat(25),`\nBeginning test of ${n} Queens...`)
+  if (n < 1) {
+    return []
+  }
+  const board = new Array(n)
+  for (let i = 0; i < n; i++) {
+    board[i] = new Array(n).fill(0)
+  }
+  const colStack = [];
+  const rowStack = []
+  let currentSol = [];
+  let solNo = 0
+  const results = [];
+  let hasSolution = true;
+  const findNodes = (row) => {
+    if (!row.some(square => square === 0)) {
+      console.log("No valid squares available")
+      return false;
+    }
+    const stack = []
+    for (let i = n - 1; i >= 0; i--) {
+      if (row[i] === 0) {
+        stack.push(i)
+      }
+    }
+    return stack;
+  }
+  const updateConnections = (row, col) => {
+    console.log(`\nUpdating connections for ${row}, ${col}...`)
+    for (let i = 0; i < n; i++) {
+      board[row][i]++
+    }
+    console.log("Filled row: \n",board)
+    for (let i = 0; i < n; i++) {
+      board[i][col]++
+    }
+    console.log("Filled col: \n",board)
+    let rd = row > col ? (n - 1) - row : (n - 1) - col
+    console.log("rd: ",rd)
+    for (let i = 0; i < rd; i++) {
+      board[row + i + 1][col + i + 1]++
+    }
+    rd > 0 ? console.log("Filled right diagonal: \n",board)
+    : console.log("No squares to fill to right-diagonal.")
+    
+    let ld = row > (n - 1) - col ? (n - 1) - row : col
+    console.log("ld: ",ld)
+    for (let i = 0; i < ld; i++) {
+      board[row + i + 1][col - i - 1]++
+    }
+    ld > 0 ? console.log("Filled left diagonal: \n",board) : console.log("No squares to fill to left-diagonal.")
+  }
+  const resetConnections = (row, col) => {
+    console.log(`\nResetting connections for row ${row}...`)
+    for (let i = 0; i < n; i++) {
+      board[row][i]--
+    }
+    console.log("Reset row: ",board)
+    for (let i = 0; i < n; i++) {
+      board[i][col]--
+    }
+    console.log("Reset col: ",board)
+    let rd = row > col ? (n - 1) - row : (n - 1) - col
+    for (let i = 0; i < rd; i++) {
+      board[row + i + 1][col + i + 1]--
+    }
+    console.log("Reset right diagonal: ",board)
+    let ld = row > (n - 1) - col ? (n - 1) - row : col
+    for (let i = 0; i < ld; i++) {
+      board[row + i + 1][col - i - 1]--
+    }
+    console.log("Reset left diagonal: ",board)
+  }
+  findNodes(board[0])
+
+  const solve = (s) => {
+    const stack = findNodes(board[s]) ? findNodes(board[s]) : [];
+    console.log(`\nstack for row ${s}`,stack)
+    if (stack.length < 1) {
+      console.log("end of stack");
+      //Something needs to happen here to unravel the whole the recursive function back to the start.
+      return;
+    }
+    console.log("--currentSol: ",currentSol)
+    while (stack.length > 0) {
+      console.log(`\nTop of while loop for row ${s}`)
+      let current = stack.pop();
+      console.log("current: ",current)
+      console.log("board: ",board)
+      updateConnections(s, current);
+      console.log(`Pushing index ${current} to currentSol...`)
+      currentSol.push(current);
+      console.log("--currentSol: ",currentSol)
+      s + 1 < n ? console.log(`Initiating solution for row ${s + 1}...`) : console.log(`Current row is the last row.
+      Going up.`)
+      if (s + 1 < n) {solve(s + 1)} else {
+        if (currentSol.length === n) {
+          console.log("Pushing currentSol to results", currentSol)
+          results.push(currentSol)
+          console.log("Current results: ",results)
+          console.log(`Number of results: ${results.length}`)
+          };
+      }
+      resetConnections(s, current);
+      let adjustSol = []
+      for (let i = 0; i < currentSol.length - 1; i++) {
+        adjustSol.push(currentSol[i])
+      }
+      currentSol = adjustSol
+      console.log("--currentSol after 'popping': ",currentSol);
+    }
+    console.log(`Stack empty for row ${s}.`)
+  }
+  solve(0)
+  
+  return results
+}
+
+
+console.log("** Conclusion of Test5: ",dfsNQueens(5))

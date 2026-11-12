@@ -20,6 +20,11 @@ const sets = [
     setArr:  ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
     setRegex: "\\d"
   },
+  {
+    value: "consonant-digraphs",
+    setArr: ["sh", "ch", "th", "ph", "wh", "ck", "gh", "ng"],
+    setRegex: "(?:sh|ch|th|ph|wh|ck|gh|ng)"
+  }
 ]
 
 const alphabetUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");

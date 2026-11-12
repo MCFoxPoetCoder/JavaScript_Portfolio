@@ -1,0 +1,45 @@
+stack for row 0 [ 3, 2, 1, 0 ]
+current:  0
+board:  [ [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ] ]
+
+Updating connections for 0, 0...
+Filled row:  [ [ 1, 1, 1, 1 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ], [ 0, 0, 0, 0 ] ]
+Filled col:  [ [ 2, 1, 1, 1 ], [ 1, 0, 0, 0 ], [ 1, 0, 0, 0 ], [ 1, 0, 0, 0 ] ]
+false 3 3
+rd:  3
+Right diagonal:  0
+Right diagonal:  0
+Right diagonal:  0
+Filled right diagonal:  [ [ 2, 1, 1, 1 ], [ 1, 1, 0, 0 ], [ 1, 0, 1, 0 ], [ 1, 0, 0, 1 ] ]
+ld:  0
+No squares to fill to left-diagonal.
+
+stack for row 1 [ 3, 2 ]
+current:  2
+board:  [ [ 2, 1, 1, 1 ], [ 1, 1, 0, 0 ], [ 1, 0, 1, 0 ], [ 1, 0, 0, 1 ] ]
+
+Updating connections for 1, 2...
+Filled row:  [ [ 2, 1, 1, 1 ], [ 2, 2, 1, 1 ], [ 1, 0, 1, 0 ], [ 1, 0, 0, 1 ] ]
+Filled col:  [ [ 2, 1, 2, 1 ], [ 2, 2, 2, 1 ], [ 1, 0, 2, 0 ], [ 1, 0, 1, 1 ] ]
+true 2 1
+rd:  1
+Right diagonal:  0
+Filled right diagonal:  [ [ 2, 1, 2, 1 ], [ 2, 2, 2, 1 ], [ 1, 0, 2, 1 ], [ 1, 0, 1, 1 ] ]
+ld:  2
+Left diagonal:  0
+Left diagonal:  1
+Filled left diagonal:  [ [ 2, 1, 2, 1 ], [ 2, 2, 2, 1 ], [ 1, 1, 2, 1 ], [ 2, 0, 1, 1 ] ]
+No valid squares available
+
+stack for row 2 []
+end of stack
+
+
+
+console.log("** Conclusion of Test1: ",dfsNQueens(1));
+console.log("** Conclusion of Test2: ",dfsNQueens(2));
+console.log("** Conclusion of Test3: ",dfsNQueens(3))
+console.log("** Conclusion of Test4: ",dfsNQueens(4))
+console.log("** Conclusion of Test5: ",dfsNQueens(5))
+console.log(dfsNQueens(5).length)
+console.log(dfsNQueens(8).length)
